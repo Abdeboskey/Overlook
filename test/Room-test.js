@@ -67,8 +67,16 @@ describe.only('Room', () => {
   it('should tell you how many beds are in a room', () => {
     const room = new Room(room24)
     const otherRoom = new Room(room11)
-
+    
     expect(room.numBeds).to.equal(1)
     expect(otherRoom.numBeds).to.equal(2)
+  })
+  
+  it('should have a cost per night', () => {
+    const room = new Room(room24)
+    const otherRoom = new Room(room11)
+    
+    expect(room.costPerNight).to.equal(327.24);
+    expect(otherRoom.costPerNight).to.equal(207.24);
   })
 })
