@@ -1,6 +1,7 @@
 class Room {
-  constructor() {
-
+  constructor(number, roomType) {
+    this.number = number
+    this.roomType = roomType
   }
 }
 
