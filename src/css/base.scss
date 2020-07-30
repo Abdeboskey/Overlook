@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap');
 
-$primary-background: radial-gradient(farthest-corner at 10px 10px, #494999 -10%, #000039 45%);
+$primary-background: radial-gradient(farthest-corner at 1200px 120px, #494999 -10%, #000039 45%);
 $main-font: 'Red Rose', monospace;
 $second-font: 'Orbitron', monospace;
 
@@ -12,7 +12,6 @@ $second-font: 'Orbitron', monospace;
 
 html, 
 body {
-  background-image: url(https://images.unsplash.com/photo-1520034475321-cbe63696469a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80);
   background: $primary-background;
   width: 100%;
   height: 100%;
@@ -27,9 +26,9 @@ body {
   .earth {
     object-fit: cover;
     border-radius: 50% ;
-    width: 30vh;
-    height: 30vh;
-    margin: 5vh;
+    width: 60vh;
+    height: 60vh;
+    margin: -15vh;
   }
 
   h1 {
