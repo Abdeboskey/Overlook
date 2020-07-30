@@ -5,6 +5,7 @@ class Room {
     this.hasBidet = room.bidet
     this.bedSize = room.bedSize
     this.numBeds = room.numBeds
+    this.costPerNight = room.costPerNight
   }
 }
 
