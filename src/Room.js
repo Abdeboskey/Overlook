@@ -1,7 +1,10 @@
 class Room {
-  constructor(number, roomType) {
-    this.number = number
-    this.roomType = roomType
+  constructor(room) {
+    this.number = room.number
+    this.roomType = room.roomType
+    this.hasBidet = room.bidet
+    this.bedSize = room.bedSize
+    this.numBeds = room.numBeds
   }
 }
 
