@@ -2,7 +2,7 @@ import chai from "chai"
 import Room from "../src/Room"
 const expect = chai.expect
 
-describe.only('Room', () => {
+describe('Room', () => {
   
   const room24 = {
     number: 24,

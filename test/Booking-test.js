@@ -2,7 +2,7 @@ import chai from "chai"
 import Booking from "../src/Booking"
 const expect = chai.expect
 
-describe.only('Booking', () => {
+describe('Booking', () => {
   
   const booking = {
     id: "5fwrgu4i7k55hl6sz",
