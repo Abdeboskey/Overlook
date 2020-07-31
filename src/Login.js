@@ -33,6 +33,8 @@ class Login {
       return 'Invalid Username. Please Try Again.';
     } else if (!this.checkPassword()) {
       return 'Incorrect Password. Please Try Again.';
+    } else {
+      return 'Valid Username and Password Required.';
     }
   }
 }
