@@ -1,10 +1,10 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap');
-
-$primary-background: radial-gradient(farthest-corner at 1200px 120px, #494999 -10%, #000024 45%);
-$main-font: 'Red Rose', monospace;
-$second-font: 'Orbitron', monospace;
+@import 'variables';
+@import 'header';
+@import 'landing';
+@import 'loading';
 
 // * {
 //   border: dotted pink 3px
@@ -19,67 +19,6 @@ body {
   margin: 0;
   font-family: $main-font;
   color: white;
-}
-
-.landing {
-  height: 100%;
-
-  .earth {
-    object-fit: cover;
-    border-radius: 50% ;
-    width: 60vh;
-    height: 60vh;
-    margin: -15vh;
-    filter: drop-shadow(0 -0.85rem 0.75rem #49a7f5)
-  }
-
-  h1 {
-    margin-top: 15vh;
-    margin-right: 5vw;
-    align-self: flex-end;
-    font-size: 4em;
-    float: right;
-    font-weight: 400;
-    text-shadow: -6px 5px 16px black;
-  }
-  
-  p {
-    clear: right;
-    font-size: 1.5em;
-    display: inline-block;
-    margin-top: 0;
-    margin-left: 53%;
-    text-shadow: -6px 5px 16px black;
-  }
-}
-
-.login-input {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 180px;
-  margin: 120px auto 0 auto;
-
-  input {
-    font-family: $main-font;
-    height: 2em;
-    background: transparentize($color: #000000, $amount: 0.6);
-    text-align: center;
-    border-radius: .5em;
-    margin-bottom: 10px;
-    font-size: 1em;
-    outline: none;
-    color: white;
-  }
-
-  button {
-    height: 2em;
-    width: 100px;
-    align-self: center;
-    font-family: $main-font;
-    border-radius: .5em;
-    font-size: 1em;
-  }
 }
 
 .hidden {
