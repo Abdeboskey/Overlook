@@ -4,7 +4,7 @@
     <title>Hotel Overlook</title>
   </head>
   <body>
-    <section class="loading ">
+    <section class="loading hidden">
       <img class="loading-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
       <h2 class="wait-message">...One Moment Please...</h2>
     </section>
@@ -18,7 +18,23 @@
         <button aria-label="log in button">Log In</button>
       </form>
     </section>
-    <section class="manager-dashboard hidden"></section>
-    <section class="guest-dashboard hidden"></section>
+    <section class="guest-dashboard hidden">
+      <header class="guest-header">
+        <img class="guest-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
+        <h2>Hotel Overlook</h2>
+        <h3>Welcome, guestName</h3>
+        <button aria-label="profile button">👨🏼‍🚀</button>
+      </header>
+      <main></main>
+    </section>
+    <section class="manager-dashboard">
+      <header class="manager-header">
+        <img class="manager-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
+        <h2>Hotel Overlook</h2>
+        <h3>Welcome, Manager</h3>
+        <button aria-label="profile button">👨🏼‍🚀</button>
+      </header>
+      <main></main>
+    </section>
   </body>
 </html>
