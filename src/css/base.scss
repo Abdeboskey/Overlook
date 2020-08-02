@@ -1,10 +1,11 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import url('https://fonts.googleapis.com/css2?family=Red+Rose:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Electrolize&display=swap');
 @import 'variables';
 @import 'header';
 @import 'landing';
 @import 'loading';
+@import 'manager';
 
 // * {
 //   border: dotted pink 3px
