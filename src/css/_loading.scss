@@ -1,0 +1,20 @@
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .loading-earth{
+    object-fit: cover;
+    border-radius: 50%;
+    width: 70vh;
+    height: 70vh;
+    margin: 5vh ;
+    filter: drop-shadow(0 -0.85rem 0.75rem #49a7f5);
+  }
+
+  .wait-message {
+    font-weight: 400;
+    color: chartreuse;
+  }
+}
