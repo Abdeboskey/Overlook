@@ -4,7 +4,11 @@
     <title>Hotel Overlook</title>
   </head>
   <body>
-    <section class="landing">
+    <section class="loading hidden">
+      <img class="loading-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
+      <h2 class="wait-message">...One Moment Please...</h2>
+    </section>
+    <section class="landing hidden">
       <img class="earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth" >
       <h1>Welcome to the Hotel Overlook</h1>
       <p>Enjoy a bird's eye view of the pale blue dot .</p>
@@ -14,7 +18,35 @@
         <button aria-label="log in button">Log In</button>
       </form>
     </section>
-    <section class="manager-dashboard hidden"></section>
-    <section class="guest-dashboard hidden"></section>
+    <section class="guest-dashboard hidden">
+      <header class="guest-header">
+        <img class="guest-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
+        <h2>Hotel Overlook</h2>
+        <h3>Welcome, guestName</h3>
+        <button aria-label="profile button">👨🏼‍🚀</button>
+      </header>
+      <main></main>
+    </section>
+    <section class="manager-dashboard">
+      <header class="manager-header">
+        <img class="manager-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
+        <h2>Hotel Overlook</h2>
+        <h3>Welcome, Manager</h3>
+        <button aria-label="profile button">🧑🏼‍🚀</button>
+      </header>
+      <main>
+        <article class="managers-log">
+          <p class="manager-date">• Manager's Log - Stardate <time datetime="2020-08-02">8/2/2020</time> •</p>
+          <p class="revenue-today">▶ Total Revenue Today: $2,487.00</p>
+          <p class="percentage-occupied">▶ 65% of rooms are currently occupied</p>
+          <p class="rooms-available">▶ 11 rooms are currently available</p>
+        </article>
+        <form class="find-guest">
+          <h4>Search Guests by Name</h4>
+          <input class="search-by-name" aria-label="Input field to search for guest by name" placeholder="guest name">
+          <button aria-label="">Find Guest</button>
+        </form>
+      </main>
+    </section>
   </body>
 </html>

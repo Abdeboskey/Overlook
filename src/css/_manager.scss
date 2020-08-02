@@ -1,0 +1,69 @@
+.manager-dashboard main {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15vh;
+}
+
+.managers-log {
+  border: solid 10px rgba(58, 67, 77, 0.705);
+  border-radius: 1em;
+  margin-top: 4vh;
+  margin-left: 250px;
+  padding: 1.5em;
+  width: 62vh;
+  background: transparentize($color: #000024, $amount: 0.4);
+  box-shadow: -5px 5px 15px rgb(0, 0, 0);
+}
+
+.manager-date {
+  margin-left: 20px;
+  font-family: $second-font;
+  color: chartreuse;
+  font-size: x-large;
+}
+
+.revenue-today {
+  @extend .manager-date;
+  margin-top: 2em;
+}
+
+.percentage-occupied {
+  @extend .manager-date;
+}
+
+.rooms-available {
+  @extend .manager-date;
+}
+
+.find-guest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @extend .manager-date;
+  margin: auto;
+
+  .search-by-name {
+    font-family: $second-font;
+    color: chartreuse;
+    height: 2em;
+    width: 18vw;
+    background: transparentize($color: #000024, $amount: 0.4);
+    text-align: center;
+    border-radius: .5em;
+    margin-bottom: 1em;
+    font-size: .9em;
+    outline: none;
+  }
+
+  button {
+    height: 1.8em;
+    width: 170px;
+    font-family: $second-font;
+    border-radius: .5em;
+    font-size: .9em;
+    background: rgba(58, 67, 77, 0.712);
+    color: white;
+    cursor: pointer;
+  }
+}
+
