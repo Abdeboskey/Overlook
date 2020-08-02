@@ -7,7 +7,7 @@ const hotel = [];
 const guests = [];
 const reservations = [];
 
-window.onload(getRooms());
+// window.onload(getRooms());
 
 
 //
