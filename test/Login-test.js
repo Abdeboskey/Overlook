@@ -2,7 +2,7 @@ import chai from 'chai'
 import Login from '../src/Login'
 const expect = chai.expect
 
-describe('Login', () => {
+describe.only('Login', () => {
   it('should be a function', () => {
     expect(Login).to.be.a('function')
   })
@@ -56,6 +56,11 @@ describe('Login', () => {
     const validId = login.validateCustomerId()
 
     expect(validId).to.equal(true)
+
+    const nuLogin = new Login("customer5", "banana123")
+    const nuValidId = nuLogin.validateCustomerId()
+
+    expect(nuValidId).to.equal(true)
 
     const loginAgain = new Login("customer0", "banana123")
     const isAnotherCustomer = loginAgain.validateCustomerId()
