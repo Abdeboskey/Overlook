@@ -7,8 +7,8 @@ import DomUpdates from './DomUpdates';
 const hotel = [];
 const guests = [];
 const reservations = [];
-let currentGuest;
 const domUpdate = new DomUpdates();
+let currentGuest;
 
 // window.onload(getRooms());
 document.addEventListener('click', clickWhat)
