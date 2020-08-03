@@ -1,18 +1,18 @@
-import './css/base.scss';
-import './images/Stars.png';
-import Room from './Room';
-import Booking from './Booking';
-import Login from './Login';
+import './css/base.scss'
+import './images/Stars.png'
+import Room from './Room'
+import Booking from './Booking'
+import Login from './Login'
 import Guest from './Guest'
-import DomUpdates from './DomUpdates';
+import DomUpdates from './DomUpdates'
 
-const hotel = [];
-const guests = [];
-const reservations = [];
-const domUpdate = new DomUpdates();
-let currentGuest;
+const hotel = []
+const guests = []
+const reservations = []
+const domUpdate = new DomUpdates()
+let currentGuest
 
-window.onload(getRooms());
+window.onload = getRooms()
 document.addEventListener('click', clickWhat)
 
 function clickWhat(event) {
@@ -34,7 +34,6 @@ function storeRooms(data) {
     let roomIsReady = new Room(room)
     hotel.push(roomIsReady)
   })
-  console.log(hotel)
 }
 
 function loginAction() {
@@ -55,7 +54,7 @@ function loginAction() {
     username.value = ''
     password.value = ''
     invalidInfo.innerText = result
-    displayElement('login-error-message');
+    displayElement('login-error-message')
   }
 }
 
@@ -70,11 +69,11 @@ function showGuestDashboard() {
 }
 
 function hideElement(className) {
-  document.querySelector(`.${className}`).classList.add("hidden");
+  document.querySelector(`.${className}`).classList.add("hidden")
 }
 
 function displayElement(className) {
-  document.querySelector(`.${className}`).classList.remove("hidden");
+  document.querySelector(`.${className}`).classList.remove("hidden")
 }
 
 
@@ -82,9 +81,9 @@ function displayElement(className) {
 
 
 //
-// to re-format the date, do a date = date.split('/');
-////////////////////////////// date.push(date.shift);
-////////////////////////////// date.join('-');
+// to re-format the date, do a date = date.split('/')
+////////////////////////////// date.push(date.shift)
+////////////////////////////// date.join('-')
 
 // Need to make all css responsive -
 //// set breakpoints and mediaQueries
