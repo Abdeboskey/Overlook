@@ -12,7 +12,7 @@ const reservations = [];
 const domUpdate = new DomUpdates();
 let currentGuest;
 
-// window.onload(getRooms());
+window.onload(getRooms());
 document.addEventListener('click', clickWhat)
 
 function clickWhat(event) {
@@ -22,7 +22,20 @@ function clickWhat(event) {
   }
 }
 
+function getRooms() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms/')
+    .then(data => data.json())
+    .then(data => storeRooms(data))
+    .catch(error => console.log(error))
+}
 
+function storeRooms(data) {
+  data.rooms.forEach(room => {
+    let roomIsReady = new Room(room)
+    hotel.push(roomIsReady)
+  })
+  console.log(hotel)
+}
 
 function loginAction() {
   let username = document.querySelector('.username-input')
