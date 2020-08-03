@@ -16,7 +16,7 @@ describe.only('Guest', () => {
 
   it('should be a function', () => {
     expect(Guest).to.be.a('function')
-  })˝
+  })
 
   it('should be an instance of Guest', () => {
     const guest = new Guest(user)
@@ -30,4 +30,14 @@ describe.only('Guest', () => {
     const nuGuest = new Guest(newUser)
     expect(nuGuest.id).to.equal(24)
   })
+  
+  it('should have a name', () => {
+    const guest = new Guest(user)
+    expect(guest.name).to.equal("Max Headroom");
+    
+    const nuGuest = new Guest(newUser)
+    expect(nuGuest.name).to.equal("Gingerboat Forgotten");
+  })
+
+  
 })
