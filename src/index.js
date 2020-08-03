@@ -3,7 +3,9 @@ import './images/Stars.png';
 import Room from './Room';
 import Booking from './Booking';
 import Login from './Login';
+import Guest from './Guest'
 import DomUpdates from './DomUpdates';
+
 const hotel = [];
 const guests = [];
 const reservations = [];
@@ -20,6 +22,8 @@ function clickWhat(event) {
   }
 }
 
+
+
 function loginAction() {
   let username = document.querySelector('.username-input')
   let password = document.querySelector('.password-input')
@@ -30,9 +34,9 @@ function loginAction() {
     showManagerDashboard()
   } else if (result === 'guest') {
     showGuestDashboard()
-    currentGuest = guests.find(guest => {
-      return guest.id === Number(login.username.slice(8)) // need to import data befrore this will work
-    })
+    currentGuest = new Guest(guests.find(guest => {
+      return guest.id === Number(login.username.slice(8))
+    }))
     console.log(currentGuest)
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     username.value = ''
@@ -89,6 +93,6 @@ function displayElement(className) {
 // Starting with an array of roomNumbers
 // Call a fetch on the rooms class since you need the Room data
 // Filter on that rooms data, for only room numbers that only match the roomNumbers.
-//Display on the page all the available rooms
+// Display on the page all the available rooms
 
 // Peudocode everything that you are gonna do, here.
