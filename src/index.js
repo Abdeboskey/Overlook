@@ -3,11 +3,25 @@ import './images/Stars.png';
 import Room from './Room';
 import Booking from './Booking';
 import Login from './Login';
+import DomUpdates from './DomUpdates';
 const hotel = [];
 const guests = [];
 const reservations = [];
+let currentGuest;
+const domUpdate = new DomUpdates();
 
 // window.onload(getRooms());
+document.addEventListener('click', clickWhat)
+
+function loginAction() {
+  let userName = document.querySelector('.username-input').value
+  let password = document.querySelector('.password-input').value
+  let login = new Login(userName)
+}
+
+
+
+
 
 
 //
