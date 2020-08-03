@@ -7,7 +7,7 @@
     width: 60vh;
     height: 60vh;
     margin: -15vh;
-    filter: drop-shadow(0 -0.85rem 0.75rem #49a7f5)
+    filter: drop-shadow(0 -0.85rem 0.75rem #49a7f5);
   }
 
   h1 {
@@ -20,13 +20,21 @@
     text-shadow: $blurry-text-shadow;
   }
   
-  p {
+  .slogan {
     clear: right;
     font-size: 1.5em;
     display: inline-block;
     margin-top: 0;
     margin-left: 53%;
     text-shadow: $blurry-text-shadow;
+  }
+
+  .login-error-message {
+    font-family: $second-font;
+    font-size: 1.7em;
+    margin-top: 2em;
+    text-align: center;
+    color: chartreuse;
   }
 }
 
