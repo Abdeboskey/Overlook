@@ -35,6 +35,7 @@ header {
   }
 
   button {
+    outline: none;
     border-radius: 1em;
     background: transparentize($color: #000024, $amount: 0.4);
     align-self: center;
