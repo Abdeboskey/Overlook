@@ -30,7 +30,9 @@ function loginAction() {
     showManagerDashboard()
   } else if (result === 'guest') {
     showGuestDashboard()
-    currentGuest = Number(login.username.slice(-2) - 1)
+    currentGuest = guests.find(guest => {
+      return guest.id === Number(login.username.slice(8)) // need to import data befrore this will work
+    })
     console.log(currentGuest)
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     username.value = ''
