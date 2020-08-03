@@ -15,7 +15,7 @@ class Login {
   }
   
   validateCustomerId() {
-    let number = Number(this.username.trim().slice(-2));
+    let number = Number(this.username.trim().slice(8));
     return number > 0 && number <= 50;
   }
 

@@ -3,11 +3,63 @@ import './images/Stars.png';
 import Room from './Room';
 import Booking from './Booking';
 import Login from './Login';
+import DomUpdates from './DomUpdates';
 const hotel = [];
 const guests = [];
 const reservations = [];
+const domUpdate = new DomUpdates();
+let currentGuest;
 
 // window.onload(getRooms());
+document.addEventListener('click', clickWhat)
+
+function clickWhat(event) {
+  if (event.target.classList.contains("login-button")) {
+    event.preventDefault()
+    loginAction()
+  }
+}
+
+function loginAction() {
+  let username = document.querySelector('.username-input')
+  let password = document.querySelector('.password-input')
+  let invalidInfo = document.querySelector('.login-error-message')
+  let login = new Login(username.value, password.value)
+  let result = login.authenticateUser()
+  if (result === 'manager') {
+    showManagerDashboard()
+  } else if (result === 'guest') {
+    showGuestDashboard()
+    currentGuest = Number(login.username.slice(-2) - 1)
+    console.log(currentGuest)
+  } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
+    username.value = ''
+    password.value = ''
+    invalidInfo.innerText = result
+    displayElement('login-error-message');
+  }
+}
+
+function showManagerDashboard() {
+  hideElement('landing')
+  displayElement('manager-dashboard')
+}
+
+function showGuestDashboard() {
+  hideElement('landing')
+  displayElement('guest-dashboard')
+}
+
+function hideElement(className) {
+  document.querySelector(`.${className}`).classList.add("hidden");
+}
+
+function displayElement(className) {
+  document.querySelector(`.${className}`).classList.remove("hidden");
+}
+
+
+
 
 
 //
