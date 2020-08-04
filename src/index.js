@@ -137,11 +137,15 @@ function loginAction() { // Dom updates
       currentDate
     );
   } else if (result === 'guest') {
-    currentGuest = guests.find(guest => guest.id === Number(login.username.slice(8)))
+    assignCurrentGuest(login)
     domUpdate.showGuestDashboard(currentGuest.name, getTotalCostOfBookings(currentGuest.bookings))
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     domUpdate.showLoginError(username, password, result)
   }
+}
+
+function assignCurrentGuest(login) {
+  currentGuest = guests.find(guest => guest.id === Number(login.username.slice(8)))
 }
 
 
