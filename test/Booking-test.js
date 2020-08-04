@@ -1,32 +1,32 @@
-import chai from "chai"
-import Booking from "../src/Booking"
+import chai from 'chai'
+import Booking from '../src/Booking'
 const expect = chai.expect
 
 describe('Booking', () => {
   
   const booking = {
-    id: "5fwrgu4i7k55hl6sz",
+    id: '5fwrgu4i7k55hl6sz',
     userID: 9,
-    date: "2020/04/22",
+    date: '2020/04/22',
     roomNumber: 15,
     roomServiceCharges: []
   }
 
   const booking2 = {
-    id: "5fwrgu4i7k55hl6t5",
+    id: '5fwrgu4i7k55hl6t5',
     userID: 43,
-    date: "2020/01/24",
+    date: '2020/01/24',
     roomNumber: 24,
     roomServiceCharges: []
   }
 
   const bltSandwich = {
-    item: "BLT Sandwich",
+    item: 'BLT Sandwich',
     price: 15.5
   }
 
   const chickenTenders = {
-    item: "Chicken Tenders",
+    item: 'Chicken Tenders',
     price: 12.4
   }
 
@@ -49,8 +49,8 @@ describe('Booking', () => {
   })
   
   it('should have a booking id', () => {
-    expect(reservation.id).to.equal("5fwrgu4i7k55hl6sz")
-    expect(anotherReservation.id).to.equal("5fwrgu4i7k55hl6t5")
+    expect(reservation.id).to.equal('5fwrgu4i7k55hl6sz')
+    expect(anotherReservation.id).to.equal('5fwrgu4i7k55hl6t5')
   })
 
   it('should have a user id', () => {    
@@ -59,8 +59,8 @@ describe('Booking', () => {
   })
   
   it('should have a booking date', () => {
-    expect(reservation.date).to.equal("2020/04/22")
-    expect(anotherReservation.date).to.equal("2020/01/24")
+    expect(reservation.date).to.equal('2020/04/22')
+    expect(anotherReservation.date).to.equal('2020/01/24')
   })
   
   it('should have a room number', () => {

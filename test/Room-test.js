@@ -1,5 +1,5 @@
-import chai from "chai"
-import Room from "../src/Room"
+import chai from 'chai'
+import Room from '../src/Room'
 const expect = chai.expect
 
 describe('Room', () => {
@@ -15,9 +15,9 @@ describe('Room', () => {
   
   const room11 = {
     number: 11,
-    roomType: "single room",
+    roomType: 'single room',
     bidet: true,
-    bedSize: "twin",
+    bedSize: 'twin',
     numBeds: 2,
     costPerNight: 207.24,
   }
@@ -32,12 +32,12 @@ describe('Room', () => {
   })
 
   it('should have a room number', () => {
-    const room = new Room(room24);
+    const room = new Room(room24)
     expect(room.number).to.equal(24)
   })
   
   it('should be able to have a different room number', () => {
-    const room = new Room(room11);
+    const room = new Room(room11)
     expect(room.number).to.equal(11)
   })
 
@@ -76,7 +76,7 @@ describe('Room', () => {
     const room = new Room(room24)
     const otherRoom = new Room(room11)
     
-    expect(room.costPerNight).to.equal(327.24);
-    expect(otherRoom.costPerNight).to.equal(207.24);
+    expect(room.costPerNight).to.equal(327.24)
+    expect(otherRoom.costPerNight).to.equal(207.24)
   })
 })

@@ -10,7 +10,7 @@ let hotel = []
 let reservations = []
 let guests = []
 let currentGuest
-let currentDate = "2020/02/26"
+let currentDate = '2020/02/26'
 const domUpdate = new DomUpdates()
 
 window.onload = buildHotel()
@@ -47,8 +47,8 @@ function getAvailableRooms(date) { // Manager Class
 
 function getReservationsByDate(date) { // method on User class
   return reservations.filter((booking) => {
-    return booking.date === date;
-  });
+    return booking.date === date
+  })
 }
 
 function getTodaysTotalRevenue(date) { // method on User class
@@ -90,7 +90,7 @@ function storeRooms(data) { // move to API calls
 }
 
 function getBookings() { // move to API calls
-  return fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+  return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings')
     .then(data => data.json())
     .then(data => storeBookings(data))
     .catch(error => console.log(error))
@@ -135,7 +135,7 @@ function loginAction() { // Dom updates
       getAvailableRooms(currentDate),
       getTodaysTotalRevenue(currentDate),
       currentDate
-    );
+    )
   } else if (result === 'guest') {
     assignCurrentGuest(login)
     domUpdate.showGuestDashboard(currentGuest.name, getTotalCostOfBookings(currentGuest.bookings))

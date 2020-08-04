@@ -52,22 +52,22 @@ describe('Login', () => {
   })
 
   it('should determine if customer number is between 1 and 50', () => {
-    const login = new Login("customer24", "banana123")
+    const login = new Login('customer24', 'banana123')
     const validId = login.validateCustomerId()
 
     expect(validId).to.equal(true)
 
-    const nuLogin = new Login("customer5", "banana123")
+    const nuLogin = new Login('customer5', 'banana123')
     const nuValidId = nuLogin.validateCustomerId()
 
     expect(nuValidId).to.equal(true)
 
-    const loginAgain = new Login("customer0", "banana123")
+    const loginAgain = new Login('customer0', 'banana123')
     const isAnotherCustomer = loginAgain.validateCustomerId()
 
     expect(isAnotherCustomer).to.equal(false)
     
-    const loginOnceMore = new Login("customer52", "banana123")
+    const loginOnceMore = new Login('customer52', 'banana123')
     const oneMoreCustomer = loginOnceMore.validateCustomerId()
 
     expect(oneMoreCustomer).to.equal(false)

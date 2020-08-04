@@ -5,7 +5,7 @@ import DomUpdates from '../src/DomUpdates'
 
 chai.use(spies)
 
-describe.only('DomUpdates', () => {
+describe('DomUpdates', () => {
 
   let domUpdate,
     userNameInput,
@@ -41,7 +41,7 @@ describe.only('DomUpdates', () => {
   })
 
   afterEach(() => {
-    chai.spy.restore(domUpdate);
+    chai.spy.restore(domUpdate)
   })
 
   it('should be a function', () => {
@@ -57,12 +57,12 @@ describe.only('DomUpdates', () => {
 
     domUpdate.showLoginError(userNameInput, passwordInput, loginResult)
 
-    expect(domUpdate.showLoginError).to.have.been.called(1);
+    expect(domUpdate.showLoginError).to.have.been.called(1)
     expect(domUpdate.showLoginError).to.have.been.called.with(userNameInput, passwordInput, loginResult)
   })
 
   it('should be able to reformat the date from yyyy/mm/dd to mm/dd/yyyy format', () => {
-    const correctDate = domUpdate.formatDate(date);
+    const correctDate = domUpdate.formatDate(date)
     expect(correctDate).to.equal('8/4/2020')
   })
 
@@ -111,7 +111,7 @@ describe.only('DomUpdates', () => {
   it('should be able to show the guest dashboard when the manager logs in', () => {
     chai.spy.on(domUpdate, ['showGuestDashboard'], () => {})
 
-    domUpdate.showGuestDashboard(guestName, costOfBookings);
+    domUpdate.showGuestDashboard(guestName, costOfBookings)
 
     expect(domUpdate.showGuestDashboard).to.have.been.called(1)
     expect(domUpdate.showGuestDashboard).to.have.been.called.with(
