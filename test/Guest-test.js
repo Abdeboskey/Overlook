@@ -2,7 +2,7 @@ import chai from 'chai'
 import Guest from '../src/Guest'
 const expect = chai.expect
 
-describe.only('Guest', () => {
+describe('Guest', () => {
 
   let user, newUser, guest, nuGuest
 
