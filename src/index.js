@@ -21,12 +21,15 @@ function clickWhat(event) {
     event.preventDefault()
     loginAction()
   } else if (event.target.innerText === '🧑🏼‍🚀') {
-    populateManagerDashboard()
+    updateManagersLog()
   }
 }
 
-function populateManagerDashboard() {
-  updateDate()
+function updateManagersLog() {
+  const date = document.querySelector('.manager-date')
+  const revenue = document.querySelector('.revenue-today')
+  date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
+  revenue.innerText = `▶ Total Revenue Today: $${getTodaysTotalRevenue(currentDate)}`
 }
 
 function formatDate(date) {
@@ -37,22 +40,18 @@ function formatDate(date) {
   return date.join('/')
 }
 
-function updateDate() {
-  const date = document.querySelector('.manager-date')
-  date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
-}
-
 function getTodaysTotalRevenue(date) {
   let todaysReservations = reservations.filter(booking => {
     return booking.date === date
   })
-  return getTotalCostOfBookings(todaysReservations)
+  return getTotalCostOfBookings(todaysReservations).toFixed(2)
 }
 
 function getTotalCostOfBookings(bookings) {
   return bookings.reduce((totalCost, booking) => {
     let room = hotel.find(room => room.number === booking.roomNumber)
     totalCost += room.costPerNight
+    totalCost += booking.getRoomServiceBill()
     return totalCost
   }, 0)
 }
