@@ -40,11 +40,15 @@ function formatDate(date) {
   return date.join('/')
 }
 
+function getReservationsByDate(date) {
+  return reservations.filter((booking) => {
+    return booking.date === date;
+  });
+}
+
 function getTodaysTotalRevenue(date) {
-  let todaysReservations = reservations.filter(booking => {
-    return booking.date === date
-  })
-  return getTotalCostOfBookings(todaysReservations).toFixed(2)
+  let todaysReservations = getReservationsByDate(date)
+  return getTotalCostOfBookings(todaysReservations)
 }
 
 function getTotalCostOfBookings(bookings) {
@@ -53,7 +57,7 @@ function getTotalCostOfBookings(bookings) {
     totalCost += room.costPerNight
     totalCost += booking.getRoomServiceBill()
     return totalCost
-  }, 0)
+  }, 0).toFixed(2)
 }
 
 function buildHotel() {
