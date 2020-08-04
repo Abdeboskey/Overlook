@@ -8,7 +8,7 @@
       <img class="loading-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
       <h2 class="wait-message">...One Moment Please...</h2>
     </section>
-    <section class="landing">
+    <section class="landing hidden">
       <img class="earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth" >
       <h1>Welcome to the Hotel Overlook</h1>
       <p class="slogan">Enjoy a bird's eye view of the pale blue dot .</p>
@@ -19,14 +19,24 @@
       </form>
       <p class="login-error-message hidden">Invalid Information. Please Try Again.</p>
     </section>
-    <section class="guest-dashboard hidden">
+    <section class="guest-dashboard ">
       <header class="guest-header">
         <img class="guest-earth" src="https://media.giphy.com/media/ixvKqzJFAg2DC/giphy.gif" alt="Planet earth">
         <h2>Hotel Overlook</h2>
-        <h3>Welcome, guestName</h3>
+        <h3 class="guest-name">Welcome, Morpheus</h3>
         <button aria-label="profile button">🧑🏼‍🚀</button>
       </header>
-      <main></main>
+      <main>
+        <article class="guest-log">
+          <p class="guest-spendings">Total spent at The Overlook: $32,400</p>
+        </article>
+        <section class="guest-controls">
+          <button>Make New Reservation</button>
+          <button>Today's Reservations</button>
+          <button>Upcoming Reservations</button>
+          <button>Past Reservations</button>
+        </section>
+      </main>
     </section>
     <section class="manager-dashboard hidden">
       <header class="manager-header">
@@ -39,7 +49,7 @@
         <article class="managers-log">
           <p class="manager-date">• Manager's Log - Stardate <time datetime="2020-08-02">8/2/2020</time> •</p>
           <p class="revenue-today">▶ Total Revenue Today: $2,487.00</p>
-          <p class="percentage-occupied">▶ 65% of rooms are currently occupied</p>
+          <p class="percentage-occupied">▶ 55% of rooms are currently occupied</p>
           <p class="rooms-available">▶ 11 rooms are currently available</p>
         </article>
         <form class="find-guest">
