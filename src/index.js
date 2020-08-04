@@ -23,6 +23,14 @@ function clickWhat(event) {
   }
 }
 
+function getTotalCostOfBookings(bookings) {
+  return bookings.reduce((totalCost, booking) => {
+    let room = hotel.find(room => room.number === booking.roomNumber)
+    totalCost += room.costPerNight
+    return totalCost
+  }, 0)
+}
+
 function buildHotel() {
   Promise.all([getRooms(), getBookings()])
     .then(() => getGuests())
