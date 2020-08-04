@@ -7,19 +7,26 @@ import Guest from './Guest'
 import DomUpdates from './DomUpdates'
 
 const hotel = []
-const guests = []
 const reservations = []
-const domUpdate = new DomUpdates()
+const guests = []
+// const domUpdate = new DomUpdates()
 let currentGuest
+let currentDate = "2020/08/03"
 
-window.onload = getRooms()
+window.onload = buildHotel()
 document.addEventListener('click', clickWhat)
 
 function clickWhat(event) {
-  if (event.target.classList.contains("login-button")) {
+  if (event.target.classList.contains('login-button')) {
     event.preventDefault()
     loginAction()
   }
+}
+
+function buildHotel() {
+  Promise.all([getRooms(), getBookings()])
+    .then(() => getGuests())
+    .catch(error => console.log(error))
 }
 
 function getRooms() {
@@ -36,6 +43,39 @@ function storeRooms(data) {
   })
 }
 
+function getBookings() {
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+    .then(data => data.json())
+    .then(data => storeBookings(data))
+    .catch(error => console.log(error))
+}
+
+function storeBookings(data) {
+  data.bookings.forEach(booking => {
+    let newBooking = new Booking(booking)
+    reservations.push(newBooking)
+  })
+}
+
+function getGuests() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+    .then(data => data.json())
+    .then(data => storeGuest(data))
+    .catch(error => console.log(error))
+}
+
+function storeGuest(data) {
+  data.users.forEach(user => {
+    let newUser = new Guest(user)
+    newUser.bookings = findGuestReservations(newUser.id)
+    guests.push(newUser)
+  })
+}
+
+function findGuestReservations(id) {
+  return reservations.filter(reservation => reservation.userId === id) 
+}
+
 function loginAction() {
   let username = document.querySelector('.username-input')
   let password = document.querySelector('.password-input')
@@ -46,9 +86,9 @@ function loginAction() {
     showManagerDashboard()
   } else if (result === 'guest') {
     showGuestDashboard()
-    currentGuest = new Guest(guests.find(guest => {
+    currentGuest = guests.find(guest => {
       return guest.id === Number(login.username.slice(8))
-    }))
+    })
     console.log(currentGuest)
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     username.value = ''
@@ -69,11 +109,11 @@ function showGuestDashboard() {
 }
 
 function hideElement(className) {
-  document.querySelector(`.${className}`).classList.add("hidden")
+  document.querySelector(`.${className}`).classList.add('hidden')
 }
 
 function displayElement(className) {
-  document.querySelector(`.${className}`).classList.remove("hidden")
+  document.querySelector(`.${className}`).classList.remove('hidden')
 }
 
 
