@@ -9,9 +9,9 @@ import DomUpdates from './DomUpdates'
 let hotel = []
 let reservations = []
 let guests = []
-// const domUpdate = new DomUpdates()
 let currentGuest
-let currentDate = "2020/08/03"
+let currentDate = "2020/02/26"
+const domUpdate = new DomUpdates()
 
 window.onload = buildHotel()
 document.addEventListener('click', clickWhat)
@@ -23,25 +23,6 @@ function clickWhat(event) {
   } else if (event.target.innerText === '🧑🏼‍🚀') {
     buildHotel()
   }
-}
-
-function updateManagersLog() { // Dom Updates
-  const date = document.querySelector('.manager-date')
-  const revenue = document.querySelector('.revenue-today')
-  const occupied = document.querySelector('.percentage-occupied')
-  const available = document.querySelector('.rooms-available')
-  date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
-  revenue.innerText = `▶ Total Revenue Today: $${getTodaysTotalRevenue(currentDate)}`
-  occupied.innerText = `▶ ${getPercentageOccupied(currentDate)}% of rooms are currently occupied`
-  available.innerText = `▶ ${getAvailableRooms(currentDate)} rooms are currently available`
-}
-
-function formatDate(date) {
-  date = date.split('/')
-  date.push(date.shift())
-  if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
-  if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
-  return date.join('/')
 }
 
 function findGuest(guestInfo) { // Should probably be in manager class
@@ -84,20 +65,22 @@ function getTotalCostOfBookings(bookings) { // method on User class
   }, 0).toFixed(2)
 }
 
-function buildHotel() {
-  Promise.all([getRooms(), getBookings()])
+function buildHotel() { // move to API calls
+  Promise.allSettled([getRooms(), getBookings()])
+  // getRooms()
+  //   .then(() => getBookings())
     .then(() => getGuests())
     .catch(error => console.log(error))
 }
 
-function getRooms() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms/')
+function getRooms() { // move to API calls
+  return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms/')
     .then(data => data.json())
     .then(data => storeRooms(data))
     .catch(error => console.log(error))
 }
 
-function storeRooms(data) {
+function storeRooms(data) { // move to API calls
   hotel = []
   data.rooms.forEach(room => {
     let roomIsReady = new Room(room)
@@ -105,90 +88,73 @@ function storeRooms(data) {
   })
 }
 
-function getBookings() {
-  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+function getBookings() { // move to API calls
+  return fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
     .then(data => data.json())
     .then(data => storeBookings(data))
     .catch(error => console.log(error))
 }
 
-function storeBookings(data) {
+function storeBookings(data) { // move to API calls
   reservations = []
   data.bookings.forEach(booking => {
     let newBooking = new Booking(booking)
     reservations.push(newBooking)
   })
-  updateManagersLog();
 }
 
-function getGuests() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+function getGuests() { // move to API calls
+  return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .then(data => storeGuest(data))
     .catch(error => console.log(error))
 }
 
-function storeGuest(data) {
+function storeGuest(data) { // move to API calls
   guests = []
   data.users.forEach(user => {
     let newUser = new Guest(user)
     newUser.bookings = findGuestReservations(newUser.id)
     guests.push(newUser)
+
   })
 }
 
-function findGuestReservations(id) {
+function findGuestReservations(id) { 
   return reservations.filter(reservation => reservation.userId === id) 
 }
 
-function loginAction() {
+function loginAction() { // Dom updates
   let username = document.querySelector('.username-input')
   let password = document.querySelector('.password-input')
-  let invalidInfo = document.querySelector('.login-error-message')
+  // let invalidInfo = document.querySelector('.login-error-message') //goes to dom
   let login = new Login(username.value, password.value)
   let result = login.authenticateUser()
   if (result === 'manager') {
-    showManagerDashboard()
+    domUpdate.showManagerDashboard(
+      getPercentageOccupied(currentDate),
+      getAvailableRooms(currentDate),
+      getTodaysTotalRevenue(currentDate),
+      currentDate
+    );
   } else if (result === 'guest') {
-    showGuestDashboard()
     currentGuest = guests.find(guest => {
       return guest.id === Number(login.username.slice(8))
     })
+    domUpdate.showGuestDashboard(
+      currentGuest.name,
+      getTotalCostOfBookings(currentGuest.bookings)
+    );
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
-    username.value = ''
-    password.value = ''
-    invalidInfo.innerText = result
-    displayElement('login-error-message')
+    domUpdate.showLoginError(username, password, result)
   }
 }
 
-function showManagerDashboard() { // Dom Updates
-  updateManagersLog()
-  hideElement('landing')
-  displayElement('manager-dashboard')
-}
-
-function showGuestDashboard() { // Dom Updates
-  hideElement('landing')
-  displayElement('guest-dashboard')
-}
-
-function hideElement(className) { // Dom Updates
-  document.querySelector(`.${className}`).classList.add('hidden')
-}
-
-function displayElement(className) { // Dom Updates
-  document.querySelector(`.${className}`).classList.remove('hidden')
-}
 
 
 
 
 
-//
-// to re-format the date, do a date = date.split('/')
-////////////////////////////// date.push(date.shift)
-////////////////////////////// date.join('-')
 
 // Need to make all css responsive -
 //// set breakpoints and mediaQueries
