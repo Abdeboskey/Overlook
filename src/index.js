@@ -6,9 +6,9 @@ import Login from './Login'
 import Guest from './Guest'
 import DomUpdates from './DomUpdates'
 
-const hotel = []
-const reservations = []
-const guests = []
+let hotel = []
+let reservations = []
+let guests = []
 // const domUpdate = new DomUpdates()
 let currentGuest
 let currentDate = "2020/08/03"
@@ -21,16 +21,18 @@ function clickWhat(event) {
     event.preventDefault()
     loginAction()
   } else if (event.target.innerText === '🧑🏼‍🚀') {
-    updateManagersLog()
+    buildHotel()
   }
 }
 
 function updateManagersLog() {
   const date = document.querySelector('.manager-date')
   const revenue = document.querySelector('.revenue-today')
+  const occupied = document.querySelector('.percentage-occupied')
   const available = document.querySelector('.rooms-available')
   date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
   revenue.innerText = `▶ Total Revenue Today: $${getTodaysTotalRevenue(currentDate)}`
+  occupied.innerText = `▶ ${getPercentageOccupied(currentDate)}% of rooms are currently occupied`;
   available.innerText = `▶ ${getAvailableRooms(currentDate)} rooms are currently available`;
 }
 
@@ -40,6 +42,13 @@ function formatDate(date) {
   if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
   if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
   return date.join('/')
+}
+
+function getPercentageOccupied(date) {
+  let available = getAvailableRooms(date)
+  let occupied = hotel.length - available
+  let percentage = (occupied / hotel.length) * 100
+  return Math.round(percentage)
 }
 
 function getAvailableRooms(date) {
@@ -81,6 +90,7 @@ function getRooms() {
 }
 
 function storeRooms(data) {
+  hotel = []
   data.rooms.forEach(room => {
     let roomIsReady = new Room(room)
     hotel.push(roomIsReady)
@@ -95,10 +105,12 @@ function getBookings() {
 }
 
 function storeBookings(data) {
+  reservations = []
   data.bookings.forEach(booking => {
     let newBooking = new Booking(booking)
     reservations.push(newBooking)
   })
+  updateManagersLog();
 }
 
 function getGuests() {
@@ -109,6 +121,7 @@ function getGuests() {
 }
 
 function storeGuest(data) {
+  guests = []
   data.users.forEach(user => {
     let newUser = new Guest(user)
     newUser.bookings = findGuestReservations(newUser.id)
@@ -133,7 +146,6 @@ function loginAction() {
     currentGuest = guests.find(guest => {
       return guest.id === Number(login.username.slice(8))
     })
-    console.log(currentGuest)
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     username.value = ''
     password.value = ''
@@ -143,6 +155,7 @@ function loginAction() {
 }
 
 function showManagerDashboard() {
+  updateManagersLog()
   hideElement('landing')
   displayElement('manager-dashboard')
 }
