@@ -25,15 +25,15 @@ function clickWhat(event) {
   }
 }
 
-function updateManagersLog() {
+function updateManagersLog() { // Dom Updates
   const date = document.querySelector('.manager-date')
   const revenue = document.querySelector('.revenue-today')
   const occupied = document.querySelector('.percentage-occupied')
   const available = document.querySelector('.rooms-available')
   date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
   revenue.innerText = `▶ Total Revenue Today: $${getTodaysTotalRevenue(currentDate)}`
-  occupied.innerText = `▶ ${getPercentageOccupied(currentDate)}% of rooms are currently occupied`;
-  available.innerText = `▶ ${getAvailableRooms(currentDate)} rooms are currently available`;
+  occupied.innerText = `▶ ${getPercentageOccupied(currentDate)}% of rooms are currently occupied`
+  available.innerText = `▶ ${getAvailableRooms(currentDate)} rooms are currently available`
 }
 
 function formatDate(date) {
@@ -44,30 +44,38 @@ function formatDate(date) {
   return date.join('/')
 }
 
-function getPercentageOccupied(date) {
+function findGuest(guestInfo) { // Should probably be in manager class
+  if (typeof guestInfo === 'number') {
+    return guests.find(guest => guest.id === guestInfo)
+  } else if (typeof guestInfo === 'string') {
+    return guests.find(guest => guest.name === guestInfo) // should this work for only last names?
+  }
+}
+
+function getPercentageOccupied(date) { // Manager Class
   let available = getAvailableRooms(date)
   let occupied = hotel.length - available
   let percentage = (occupied / hotel.length) * 100
   return Math.round(percentage)
 }
 
-function getAvailableRooms(date) {
+function getAvailableRooms(date) { // Manager Class
   let rooms = hotel.length - getReservationsByDate(date).length
   return rooms
 }
 
-function getReservationsByDate(date) {
+function getReservationsByDate(date) { // method on User class
   return reservations.filter((booking) => {
     return booking.date === date;
   });
 }
 
-function getTodaysTotalRevenue(date) {
+function getTodaysTotalRevenue(date) { // method on User class
   let todaysReservations = getReservationsByDate(date)
   return getTotalCostOfBookings(todaysReservations)
 }
 
-function getTotalCostOfBookings(bookings) {
+function getTotalCostOfBookings(bookings) { // method on User class
   return bookings.reduce((totalCost, booking) => {
     let room = hotel.find(room => room.number === booking.roomNumber)
     totalCost += room.costPerNight
@@ -154,22 +162,22 @@ function loginAction() {
   }
 }
 
-function showManagerDashboard() {
+function showManagerDashboard() { // Dom Updates
   updateManagersLog()
   hideElement('landing')
   displayElement('manager-dashboard')
 }
 
-function showGuestDashboard() {
+function showGuestDashboard() { // Dom Updates
   hideElement('landing')
   displayElement('guest-dashboard')
 }
 
-function hideElement(className) {
+function hideElement(className) { // Dom Updates
   document.querySelector(`.${className}`).classList.add('hidden')
 }
 
-function displayElement(className) {
+function displayElement(className) { // Dom Updates
   document.querySelector(`.${className}`).classList.remove('hidden')
 }
 
