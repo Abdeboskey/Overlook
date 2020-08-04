@@ -65,6 +65,7 @@ function getTotalCostOfBookings(bookings) { // method on User class
   }, 0).toFixed(2)
 }
 
+//api.getRooms().then(roomData => storeRoom(roomdatat)).the(f)
 function buildHotel() { // move to API calls
   Promise.allSettled([getRooms(), getBookings()])
   // getRooms()
@@ -76,13 +77,13 @@ function buildHotel() { // move to API calls
 function getRooms() { // move to API calls
   return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms/')
     .then(data => data.json())
-    .then(data => storeRooms(data))
+    .then(data => storeRooms(data)) // instead of storeRooms(data) return roomData
     .catch(error => console.log(error))
 }
 
 function storeRooms(data) { // move to API calls
   hotel = []
-  data.rooms.forEach(room => {
+  data.rooms.forEach(room => {  //roomData.forEach
     let roomIsReady = new Room(room)
     hotel.push(roomIsReady)
   })
@@ -116,7 +117,6 @@ function storeGuest(data) { // move to API calls
     let newUser = new Guest(user)
     newUser.bookings = findGuestReservations(newUser.id)
     guests.push(newUser)
-
   })
 }
 
@@ -127,7 +127,6 @@ function findGuestReservations(id) {
 function loginAction() { // Dom updates
   let username = document.querySelector('.username-input')
   let password = document.querySelector('.password-input')
-  // let invalidInfo = document.querySelector('.login-error-message') //goes to dom
   let login = new Login(username.value, password.value)
   let result = login.authenticateUser()
   if (result === 'manager') {
@@ -138,13 +137,8 @@ function loginAction() { // Dom updates
       currentDate
     );
   } else if (result === 'guest') {
-    currentGuest = guests.find(guest => {
-      return guest.id === Number(login.username.slice(8))
-    })
-    domUpdate.showGuestDashboard(
-      currentGuest.name,
-      getTotalCostOfBookings(currentGuest.bookings)
-    );
+    currentGuest = guests.find(guest => guest.id === Number(login.username.slice(8)))
+    domUpdate.showGuestDashboard(currentGuest.name, getTotalCostOfBookings(currentGuest.bookings))
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     domUpdate.showLoginError(username, password, result)
   }
