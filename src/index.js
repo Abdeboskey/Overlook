@@ -28,8 +28,10 @@ function clickWhat(event) {
 function updateManagersLog() {
   const date = document.querySelector('.manager-date')
   const revenue = document.querySelector('.revenue-today')
+  const available = document.querySelector('.rooms-available')
   date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
   revenue.innerText = `▶ Total Revenue Today: $${getTodaysTotalRevenue(currentDate)}`
+  available.innerText = `▶ ${getAvailableRooms(currentDate)} rooms are currently available`;
 }
 
 function formatDate(date) {
@@ -38,6 +40,11 @@ function formatDate(date) {
   if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
   if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
   return date.join('/')
+}
+
+function getAvailableRooms(date) {
+  let rooms = hotel.length - getReservationsByDate(date).length
+  return rooms
 }
 
 function getReservationsByDate(date) {
