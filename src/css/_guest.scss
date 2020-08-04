@@ -1,0 +1,25 @@
+.guest-dashboard {
+  @extend .manager-dashboard;
+}
+
+.guest-log {
+  @extend .managers-log;
+  height: 10vh;
+}
+
+.guest-spendings {
+  @extend .manager-date;
+  margin-bottom: 0;
+}
+
+.guest-controls {
+  @extend .find-guest;
+
+  button {
+    width: 275px;
+    margin-bottom: .9em;
+    outline: 0;
+    box-shadow: -5px 5px 15px rgb(0, 0, 0);
+  }
+}
+
