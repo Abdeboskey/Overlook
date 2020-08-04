@@ -2,20 +2,20 @@ import chai from 'chai'
 import Guest from '../src/Guest'
 const expect = chai.expect
 
-describe.only('Guest', () => {
+describe('Guest', () => {
 
   let user, newUser, guest, nuGuest
 
   before(() => {
     user = {
       id: 1,
-      name: "Max Headroom"
+      name: 'Max Headroom'
     }
   
     newUser = {
       id: 24,
-      name: "Gingerboat Forgotten"
-    };
+      name: 'Gingerboat Forgotten'
+    }
 
     guest = new Guest(user)
     nuGuest = new Guest(newUser)
@@ -35,8 +35,8 @@ describe.only('Guest', () => {
   })
   
   it('should have a name', () => {
-    expect(guest.name).to.equal("Max Headroom");
-    expect(nuGuest.name).to.equal("Gingerboat Forgotten");
+    expect(guest.name).to.equal('Max Headroom')
+    expect(nuGuest.name).to.equal('Gingerboat Forgotten')
   })
 
   it('should start with no bookings', () => {
