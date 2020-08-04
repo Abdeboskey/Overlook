@@ -6,12 +6,12 @@ import Login from './Login'
 import Guest from './Guest'
 import DomUpdates from './DomUpdates'
 
-const hotel = []
-const reservations = []
-const guests = []
-// const domUpdate = new DomUpdates()
+let hotel = []
+let reservations = []
+let guests = []
 let currentGuest
-let currentDate = "2020/08/03"
+let currentDate = "2020/02/26"
+const domUpdate = new DomUpdates()
 
 window.onload = buildHotel()
 document.addEventListener('click', clickWhat)
@@ -20,118 +20,141 @@ function clickWhat(event) {
   if (event.target.classList.contains('login-button')) {
     event.preventDefault()
     loginAction()
+  } else if (event.target.innerText === '🧑🏼‍🚀') {
+    buildHotel()
   }
 }
 
-function getTotalCostOfBookings(bookings) {
+function findGuest(guestInfo) { // Should probably be in manager class
+  if (typeof guestInfo === 'number') {
+    return guests.find(guest => guest.id === guestInfo)
+  } else if (typeof guestInfo === 'string') {
+    return guests.find(guest => guest.name === guestInfo) // should this work for only last names?
+  }
+}
+
+function getPercentageOccupied(date) { // Manager Class
+  let available = getAvailableRooms(date)
+  let occupied = hotel.length - available
+  let percentage = (occupied / hotel.length) * 100
+  return Math.round(percentage)
+}
+
+function getAvailableRooms(date) { // Manager Class
+  let rooms = hotel.length - getReservationsByDate(date).length
+  return rooms
+}
+
+function getReservationsByDate(date) { // method on User class
+  return reservations.filter((booking) => {
+    return booking.date === date;
+  });
+}
+
+function getTodaysTotalRevenue(date) { // method on User class
+  let todaysReservations = getReservationsByDate(date)
+  return getTotalCostOfBookings(todaysReservations)
+}
+
+function getTotalCostOfBookings(bookings) { // method on User class
   return bookings.reduce((totalCost, booking) => {
     let room = hotel.find(room => room.number === booking.roomNumber)
     totalCost += room.costPerNight
+    totalCost += booking.getRoomServiceBill()
     return totalCost
-  }, 0)
+  }, 0).toFixed(2)
 }
 
-function buildHotel() {
-  Promise.all([getRooms(), getBookings()])
+function buildHotel() { // move to API calls
+  Promise.allSettled([getRooms(), getBookings()])
+  // getRooms()
+  //   .then(() => getBookings())
     .then(() => getGuests())
     .catch(error => console.log(error))
 }
 
-function getRooms() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms/')
+function getRooms() { // move to API calls
+  return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms/')
     .then(data => data.json())
     .then(data => storeRooms(data))
     .catch(error => console.log(error))
 }
 
-function storeRooms(data) {
+function storeRooms(data) { // move to API calls
+  hotel = []
   data.rooms.forEach(room => {
     let roomIsReady = new Room(room)
     hotel.push(roomIsReady)
   })
 }
 
-function getBookings() {
-  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+function getBookings() { // move to API calls
+  return fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
     .then(data => data.json())
     .then(data => storeBookings(data))
     .catch(error => console.log(error))
 }
 
-function storeBookings(data) {
+function storeBookings(data) { // move to API calls
+  reservations = []
   data.bookings.forEach(booking => {
     let newBooking = new Booking(booking)
     reservations.push(newBooking)
   })
 }
 
-function getGuests() {
-  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+function getGuests() { // move to API calls
+  return fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
     .then(data => data.json())
     .then(data => storeGuest(data))
     .catch(error => console.log(error))
 }
 
-function storeGuest(data) {
+function storeGuest(data) { // move to API calls
+  guests = []
   data.users.forEach(user => {
     let newUser = new Guest(user)
     newUser.bookings = findGuestReservations(newUser.id)
     guests.push(newUser)
+
   })
 }
 
-function findGuestReservations(id) {
+function findGuestReservations(id) { 
   return reservations.filter(reservation => reservation.userId === id) 
 }
 
-function loginAction() {
+function loginAction() { // Dom updates
   let username = document.querySelector('.username-input')
   let password = document.querySelector('.password-input')
-  let invalidInfo = document.querySelector('.login-error-message')
+  // let invalidInfo = document.querySelector('.login-error-message') //goes to dom
   let login = new Login(username.value, password.value)
   let result = login.authenticateUser()
   if (result === 'manager') {
-    showManagerDashboard()
+    domUpdate.showManagerDashboard(
+      getPercentageOccupied(currentDate),
+      getAvailableRooms(currentDate),
+      getTodaysTotalRevenue(currentDate),
+      currentDate
+    );
   } else if (result === 'guest') {
-    showGuestDashboard()
     currentGuest = guests.find(guest => {
       return guest.id === Number(login.username.slice(8))
     })
-    console.log(currentGuest)
+    domUpdate.showGuestDashboard(
+      currentGuest.name,
+      getTotalCostOfBookings(currentGuest.bookings)
+    );
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
-    username.value = ''
-    password.value = ''
-    invalidInfo.innerText = result
-    displayElement('login-error-message')
+    domUpdate.showLoginError(username, password, result)
   }
 }
 
-function showManagerDashboard() {
-  hideElement('landing')
-  displayElement('manager-dashboard')
-}
-
-function showGuestDashboard() {
-  hideElement('landing')
-  displayElement('guest-dashboard')
-}
-
-function hideElement(className) {
-  document.querySelector(`.${className}`).classList.add('hidden')
-}
-
-function displayElement(className) {
-  document.querySelector(`.${className}`).classList.remove('hidden')
-}
 
 
 
 
 
-//
-// to re-format the date, do a date = date.split('/')
-////////////////////////////// date.push(date.shift)
-////////////////////////////// date.join('-')
 
 // Need to make all css responsive -
 //// set breakpoints and mediaQueries
