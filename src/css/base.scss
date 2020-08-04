@@ -6,15 +6,16 @@
 @import 'landing';
 @import 'loading';
 @import 'manager';
+@import 'guest';
 
 // * {
 //   border: dotted pink 3px
 // }
 
-@keyframes animatedBackground {
-  from { background-position: 0 0; }
-  to { background-position: 100% 0; }
-}
+// @keyframes animatedBackground {
+//   from { background-position: 0 0; }
+//   to { background-position: 100% 0; }
+// }
 
 html, 
 body {
