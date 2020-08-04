@@ -23,6 +23,15 @@ function clickWhat(event) {
   }
 }
 
+
+
+function getTodaysTotalRevenue(date) {
+  let todaysReservations = reservations.filter(booking => {
+    return booking.date === date
+  })
+  return getTotalCostOfBookings(todaysReservations)
+}
+
 function getTotalCostOfBookings(bookings) {
   return bookings.reduce((totalCost, booking) => {
     let room = hotel.find(room => room.number === booking.roomNumber)
