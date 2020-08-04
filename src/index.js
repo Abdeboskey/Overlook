@@ -1,25 +1,40 @@
-import './css/base.scss';
-import './images/Stars.png';
-import Room from './Room';
-import Booking from './Booking';
-import Login from './Login';
+import './css/base.scss'
+import './images/Stars.png'
+import Room from './Room'
+import Booking from './Booking'
+import Login from './Login'
 import Guest from './Guest'
-import DomUpdates from './DomUpdates';
+import DomUpdates from './DomUpdates'
 
-const hotel = [];
-const guests = [];
-const reservations = [];
-const domUpdate = new DomUpdates();
-let currentGuest;
+const hotel = []
+const reservations = []
+const guests = []
+// const domUpdate = new DomUpdates()
+let currentGuest
+let currentDate = "2020/08/03"
 
-window.onload(getRooms());
+window.onload = buildHotel()
 document.addEventListener('click', clickWhat)
 
 function clickWhat(event) {
-  if (event.target.classList.contains("login-button")) {
+  if (event.target.classList.contains('login-button')) {
     event.preventDefault()
     loginAction()
   }
+}
+
+function getTotalCostOfBookings(bookings) {
+  return bookings.reduce((totalCost, booking) => {
+    let room = hotel.find(room => room.number === booking.roomNumber)
+    totalCost += room.costPerNight
+    return totalCost
+  }, 0)
+}
+
+function buildHotel() {
+  Promise.all([getRooms(), getBookings()])
+    .then(() => getGuests())
+    .catch(error => console.log(error))
 }
 
 function getRooms() {
@@ -34,7 +49,39 @@ function storeRooms(data) {
     let roomIsReady = new Room(room)
     hotel.push(roomIsReady)
   })
-  console.log(hotel)
+}
+
+function getBookings() {
+  fetch("https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings")
+    .then(data => data.json())
+    .then(data => storeBookings(data))
+    .catch(error => console.log(error))
+}
+
+function storeBookings(data) {
+  data.bookings.forEach(booking => {
+    let newBooking = new Booking(booking)
+    reservations.push(newBooking)
+  })
+}
+
+function getGuests() {
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/users/users')
+    .then(data => data.json())
+    .then(data => storeGuest(data))
+    .catch(error => console.log(error))
+}
+
+function storeGuest(data) {
+  data.users.forEach(user => {
+    let newUser = new Guest(user)
+    newUser.bookings = findGuestReservations(newUser.id)
+    guests.push(newUser)
+  })
+}
+
+function findGuestReservations(id) {
+  return reservations.filter(reservation => reservation.userId === id) 
 }
 
 function loginAction() {
@@ -47,15 +94,15 @@ function loginAction() {
     showManagerDashboard()
   } else if (result === 'guest') {
     showGuestDashboard()
-    currentGuest = new Guest(guests.find(guest => {
+    currentGuest = guests.find(guest => {
       return guest.id === Number(login.username.slice(8))
-    }))
+    })
     console.log(currentGuest)
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     username.value = ''
     password.value = ''
     invalidInfo.innerText = result
-    displayElement('login-error-message');
+    displayElement('login-error-message')
   }
 }
 
@@ -70,11 +117,11 @@ function showGuestDashboard() {
 }
 
 function hideElement(className) {
-  document.querySelector(`.${className}`).classList.add("hidden");
+  document.querySelector(`.${className}`).classList.add('hidden')
 }
 
 function displayElement(className) {
-  document.querySelector(`.${className}`).classList.remove("hidden");
+  document.querySelector(`.${className}`).classList.remove('hidden')
 }
 
 
@@ -82,9 +129,9 @@ function displayElement(className) {
 
 
 //
-// to re-format the date, do a date = date.split('/');
-////////////////////////////// date.push(date.shift);
-////////////////////////////// date.join('-');
+// to re-format the date, do a date = date.split('/')
+////////////////////////////// date.push(date.shift)
+////////////////////////////// date.join('-')
 
 // Need to make all css responsive -
 //// set breakpoints and mediaQueries
