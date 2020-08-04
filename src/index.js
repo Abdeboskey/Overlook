@@ -20,10 +20,27 @@ function clickWhat(event) {
   if (event.target.classList.contains('login-button')) {
     event.preventDefault()
     loginAction()
+  } else if (event.target.innerText === '🧑🏼‍🚀') {
+    populateManagerDashboard()
   }
 }
 
+function populateManagerDashboard() {
+  updateDate()
+}
 
+function formatDate(date) {
+  date = date.split('/')
+  date.push(date.shift())
+  if (date[0].charAt(0) === '0') date[0] = date[0].slice(1)
+  if (date[1].charAt(0) === '0') date[1] = date[1].slice(1)
+  return date.join('/')
+}
+
+function updateDate() {
+  const date = document.querySelector('.manager-date')
+  date.innerText = `• Manager's Log - Stardate ${formatDate(currentDate)} •`
+}
 
 function getTodaysTotalRevenue(date) {
   let todaysReservations = reservations.filter(booking => {
