@@ -2,7 +2,7 @@ import chai from 'chai'
 import Login from '../src/Login'
 const expect = chai.expect
 
-describe.only('Login', () => {
+describe('Login', () => {
   it('should be a function', () => {
     expect(Login).to.be.a('function')
   })
