@@ -4,10 +4,27 @@
 
 .guest-log {
   @extend .managers-log;
-  height: 10vh;
+  min-height: 10vh;
   margin-top: 0;
-  // max-height: 70vh;
+  max-height: 50vh;
   overflow: scroll;
+  
+  .room-card {
+    border: solid chartreuse 3px;
+    border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+  }
+
+  p {
+    @extend .manager-date;
+    line-height: .5em;
+  }
+
+  // .apology {
+  //   line-height: 1.2em;
+  //   height: auto;
+  // }
 }
 
 .guest-spendings {
@@ -19,7 +36,7 @@
   @extend .find-guest;
 
   button {
-    width: 275px;
+    width: 324px;
     margin-bottom: .9em;
     outline: 0;
     box-shadow: -5px 5px 15px rgb(0, 0, 0);

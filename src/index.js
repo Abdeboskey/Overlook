@@ -19,16 +19,16 @@ document.addEventListener('click', clickWhat)
 function clickWhat(event) {
   if (event.target.classList.contains('login-button')) {
     event.preventDefault()
+    // domUpdate.showLoadingScreen('landing', '')
     loginAction()
   } else if (event.target.innerText === '🧑🏼‍🚀') {
     buildHotel()
-  } 
-  // else if (event.target.classList.contains('todays-reservations')) {
-  //   const todaysReservations = getReservationsByDate(currentDate, currentGuest.bookings)
-  //   domUpdate.showTodaysReservations(todaysReservations, hotel)
-  // }
+  } else if (event.target.classList.contains('todays-reservations')) {
+    const todaysReservations = getReservationsByDate(currentDate, currentGuest.bookings)
+    console.log(todaysReservations)
+    domUpdate.showTodaysReservations(todaysReservations, hotel)
+  }
 }
-
 
 function findGuest(guestInfo) {
   if (typeof guestInfo === 'number') {
@@ -133,6 +133,7 @@ function loginAction() {
   let login = new Login(username.value, password.value)
   let result = login.authenticateUser()
   if (result === 'manager') {
+    domUpdate.stopAnimation()
     domUpdate.showManagerDashboard(
       getPercentageOccupied(currentDate),
       getAvailableRooms(currentDate),
@@ -141,6 +142,7 @@ function loginAction() {
     )
   } else if (result === 'guest') {
     assignCurrentGuest(login)
+    domUpdate.stopAnimation();
     domUpdate.showGuestDashboard(currentGuest.name, getTotalCostOfBookings(currentGuest.bookings))
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     domUpdate.showLoginError(username, password, result)
@@ -148,5 +150,7 @@ function loginAction() {
 }
 
 function assignCurrentGuest(login) {
-  currentGuest = guests.find(guest => guest.id === Number(login.username.slice(8)))
+  currentGuest = guests.find(guest => {
+    return guest.id === Number(login.username.slice(8))
+  })
 }

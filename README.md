@@ -6,23 +6,25 @@
 ##### As a Manager, users of this application can currently:
 
 * Log In.
-* View the total rooms available for today's date.
-* View the percentage of rooms occupied for today's date.
-* View the total revenue for today's date.
+* View the total rooms available for today's `currentDate`.
+* View the percentage of rooms occupied for the `currentDate`.
+* View the total revenue for the `currentDate`.
 
 ##### As a guest, users of this application can currently:
 
 * Log In.
 * View the total amount of money they have spent ot the Hotel Overlook.
+* View their reservations for the `currentDate`
 
 #### This was a Mod 2 project in Turing School of Software and Design's Front End Engineering program during the 2006 inning. The project was designed to help students better understand how to:
 
 * Follow a specification to make a working application.
-* Use OOP to drive the design of the application and the code
+* Use OOP to drive the design of the application and the code.
 * Write modular, reusable code that is DRY and follows SRP (Single Responsibility Principle).
 * Implement a robust testing suite using TDD, and use `chai-spies` where appropriate
 * Use array prototype methods to perform data manipulation.
 * Work with an API to send and recieve data. 
+* Use scss to create DRY stylings.
 * Create a user interface that is easy to use and displays information in a clear way.
 
 ## Setup/Install
@@ -60,11 +62,11 @@
 
 This project was by far the biggest solo project I have been assigned during my time at Turing. I had quite honestly not done a great job of taking good care of myself up until this point of this mod, and by the time I started working on this application I was already quite burned out. I became very overwhelmed by the size of this project, and my brain just seemed to short circuit. I had a very hard time making much progress, and when I did it was very slow going. 
 
-Part of the challenge came from not completing enough of my previous projects to feel like I knew how to do the things that this project required. All in all, it contributed to this project seeming like an "impossible task", and I had a really hard time overcoming that.
+Part of the challenge came from not completing enough of my previous projects to feel like I knew how to do the things that this project required. Part of it was the short turnaround. All in all, a number of things contributed to this project seeming like an "impossible task", and I had a really hard time overcoming that.
 
 #### Some Wins
 
-Despite not completing much functionality, I am very proud of the design and the UI on this application. I learned some exciting new tools with scss, and I will definitely count the UI and design as a win. 
+Despite not completing as much functionality as I wanted to, I am very proud of the design and the UI on this application. I learned some exciting new tools with scss, and I will definitely count the UI and design as a win. 
 
 I was able to achieve an accessibility score of 100 using lighthouse in the devtools to audit the application.
 
@@ -74,9 +76,9 @@ I successfully put all Dom-Manipulation methods in their own class and implement
 
 ### Future Iterations
 
-* On Login, guests would be able to click buttons to view their past, present, and future reservations at The Overlook.
-* Guests should be able to search for a reservation by date, and filter the results by room type, and book a room for a future stay at the Overlook. The new booking would send a `POST` request to the API and update the database with the booking.
+* On Login, guests would be able to click buttons to view their past, and future reservations at The Overlook, and cancel future reservations if they choose.
 
+* Guests should be able to search for a new reservation by date, filter the results by room type and maximum cost, view the available results, and book a room for a future stay at the Overlook. The new booking would send a `POST` request to the API and update the database with the booking.
 
 * Managers would be able to search for a guest by name or ID, view their information, (name, all bookings, and total amount spent at the Overlook) and add bookings or cancel future bookings for that guest.
 

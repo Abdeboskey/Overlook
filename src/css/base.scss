@@ -21,14 +21,17 @@ html,
 body {
   background-image: $primary-background, url(../images/Stars.png);
   background-blend-mode: lighten, darken;
-  background-position: 0px 0px;
-  background-repeat: repeat-x;
-  animation: animatedBackground 40s linear infinite;
   width: 100%;
   height: 100%;
   margin: 0;
   font-family: $main-font;
   color: white;
+}
+
+.animate-background {
+  background-position: 0px 0px;
+  background-repeat: repeat-x;
+  animation: animatedBackground 40s linear infinite;
 }
 
 .hidden {
