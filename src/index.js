@@ -150,5 +150,7 @@ function loginAction() {
 }
 
 function assignCurrentGuest(login) {
-  currentGuest = guests.find(guest => guest.id === Number(login.username.slice(8)))
+  currentGuest = guests.find(guest => {
+    return guest.id === Number(login.username.slice(8))
+  })
 }
