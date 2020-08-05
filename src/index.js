@@ -133,6 +133,7 @@ function loginAction() {
   let login = new Login(username.value, password.value)
   let result = login.authenticateUser()
   if (result === 'manager') {
+    domUpdate.stopAnimation()
     domUpdate.showManagerDashboard(
       getPercentageOccupied(currentDate),
       getAvailableRooms(currentDate),
@@ -141,6 +142,7 @@ function loginAction() {
     )
   } else if (result === 'guest') {
     assignCurrentGuest(login)
+    domUpdate.stopAnimation();
     domUpdate.showGuestDashboard(currentGuest.name, getTotalCostOfBookings(currentGuest.bookings))
   } else if (result.charAt(0) === 'I' || result.charAt(0) === 'V') {
     domUpdate.showLoginError(username, password, result)

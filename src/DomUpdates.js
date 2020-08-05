@@ -23,7 +23,7 @@ class DomUpdates {
     guestName.innerText = `Signed in as ${currentGuestName}`
     spendings.innerHTML = `
     <p>Hello ${currentGuestName.split(" ")[0]}</p>
-    <p>☺︎</p>
+    <p>. . . ☺︎</p>
     <p>You have spent a total of $${costOfBookings}</p>
     <p> at The Overlook Hotel.</p>
     <p>What would you like to do? ☞</p>`;
@@ -65,6 +65,10 @@ class DomUpdates {
 
   displayElement(className) {
     document.querySelector(`.${className}`).classList.remove('hidden')
+  }
+
+  stopAnimation() {
+    document.querySelector(`.body`).classList.remove("animate-background");
   }
 
   showTodaysReservations(reservations, rooms) {
