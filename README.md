@@ -1,105 +1,85 @@
-# Webpack Starter Kit
+# Overlook
 
-## Clone This Repo
+#### Overlook is a hotel management application that allows users to login as either a manager or a guest. 
+##### Due to some personal challenges, the application currently has some limited functionality.
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+##### As a Manager, users of this application can currently:
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+* Log In.
+* View the total rooms available for today's date.
+* View the percentage of rooms occupied for today's date.
+* View the total revenue for today's date.
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+##### As a guest, users of this application can currently:
 
-## Setup
+* Log In.
+* View the total amount of money they have spent ot the Hotel Overlook.
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
+#### This was a Mod 2 project in Turing School of Software and Design's Front End Engineering program during the 2006 inning. The project was designed to help students better understand how to:
 
-Then install the library dependencies. Run:
+* Follow a specification to make a working application.
+* Use OOP to drive the design of the application and the code
+* Write modular, reusable code that is DRY and follows SRP (Single Responsibility Principle).
+* Implement a robust testing suite using TDD, and use `chai-spies` where appropriate
+* Use array prototype methods to perform data manipulation.
+* Work with an API to send and recieve data. 
+* Create a user interface that is easy to use and displays information in a clear way.
 
-```bash
-npm install
-```
+## Setup/Install
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text, Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+* Open your terminal and clone the repo using `git clone git@github.com:Abdeboskey/Overlook.git`.
 
-## Where to Add Your Code
+* `cd` into the repository and open it in your favorite text editor.
 
-### JavaScript
+* From the root of this directory, run `npm install` to download the dependencies.
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+* To get dependencies for testing with chai-spies, run `npm install chai-spies`.
 
-**Create all of your feature code files in the `src` directory.**
+* If you would like to run tests, run `npm test` from the root directory in your terminal.
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+* To launch the application run `npm start` and navigate to `http://localhost:8080/` in your favorite browser.
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+## Application in Action
 
-### HTML
+* Navigate to the website, and login with the username `manager` and the password `overlook2020`
 
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
+![gif of manager loggin in]()
 
-### CSS (SCSS/SASS)
+* Refresh the page, and login with the username `customer[number 1-50]` and the password `overlook2020`
 
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
+![gif of guest logging in]()
 
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
+* When a user types an incorrect username or password, an error message will be shown asking them to try again.
 
-### Images
+![gif of 'invalid information' message]()
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
 
-## How to View Your Code in Action
+## Challenges/Wins
 
-In the terminal, run:
+#### Setbacks
 
-```bash
-npm start
-```
+This project was by far the biggest solo project I have been assigned during my time at Turing. I had quite honestly not done a great job of taking good care of myself up until this point of this mod, and by the time I started working on this application I was already quite burned out. I became very overwhelmed by the size of this project, and my brain just seemed to short circuit. I had a very hard time making much progress, and when I did it was very slow going. 
 
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
+Part of the challenge came from not completing enough of my previous projects to feel like I knew how to do the things that this project required. All in all, it contributed to this project seeming like an "impossible task"
 
-```bash
-Project is running at http://localhost:8080/
-```
+#### Some Wins
 
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
+Despite not completing much functionality, I am very proud of the design and the UI on this application. I learned some exciting new tools with scss, and I will definitely count the UI and design as a win. 
 
----
+I was able to achieve an accessibility score of 100 using lighthouse in the devtools to audit the application.
 
-## Test Files Organization
+I was able to correctly fetch the starting data from the APIs, and use it to dynamically update the guest and manager dashboards.
 
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
+I successfully put all Dom-Manipulation methods in their own class and implemented `chai-spies` in testing, which was a first for me and a personal learning goal on this project.
 
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
+### Future Iterations
 
-## Running Your Tests
+* On Login, guests would be able to click buttons to view their past, present, and future reservations at The Overlook.
+* Guests should be able to search for a reservation by date, and filter the results by room type, and book a room for a future stay at the Overlook. The new booking would send a `POST` request to the API and update the database with the booking.
 
-Run your test suite using the command:
 
-```bash
-npm test
-```
+* Managers would be able to search for a guest by name or ID, view their information, (name, all bookings, and total amount spent at the Overlook) and add bookings or cancel future bookings for that guest.
 
-The test results will output to the terminal.
+## Contributors
 
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+* This project was submitted on 8/4/2020 by [Aaron Burris-DeBoskey](https://github.com/Abdeboskey).
