@@ -60,7 +60,7 @@
 
 This project was by far the biggest solo project I have been assigned during my time at Turing. I had quite honestly not done a great job of taking good care of myself up until this point of this mod, and by the time I started working on this application I was already quite burned out. I became very overwhelmed by the size of this project, and my brain just seemed to short circuit. I had a very hard time making much progress, and when I did it was very slow going. 
 
-Part of the challenge came from not completing enough of my previous projects to feel like I knew how to do the things that this project required. All in all, it contributed to this project seeming like an "impossible task", and me having a really hard time overcoming that.
+Part of the challenge came from not completing enough of my previous projects to feel like I knew how to do the things that this project required. All in all, it contributed to this project seeming like an "impossible task", and I had a really hard time overcoming that.
 
 #### Some Wins
 
