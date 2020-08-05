@@ -5,6 +5,9 @@
 .guest-log {
   @extend .managers-log;
   height: 10vh;
+  margin-top: 0;
+  // max-height: 70vh;
+  overflow: scroll;
 }
 
 .guest-spendings {
