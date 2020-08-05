@@ -61,6 +61,20 @@ class DomUpdates {
   displayElement(className) {
     document.querySelector(`.${className}`).classList.remove('hidden')
   }
+
+  // showTodaysReservations(reservations, rooms) {
+  //   const guestLog = document.querySelector('.guest-log')
+  //   guestLog.innerHTML = ''
+  //   reservations.forEach(reservation => {
+  //     let room = rooms.find(room => room.number === reservation.roomNumber)
+  //     guestLog.innerHTML += `
+  //     <p>▶ ${this.formatDate(reservation.date)}</p>
+  //     <p>• ${room.roomType}</p>
+  //     <p>• ${room.numBeds} ${room.bedSize} beds</p>
+  //     <p>• $${room.costPerNight}</p><br>
+  //     `
+  //   })
+  // }
 }
 
 export default DomUpdates
