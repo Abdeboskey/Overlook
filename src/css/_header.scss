@@ -52,6 +52,7 @@ header {
     list-style: none;
 
     li {
+      cursor: pointer;
       font-family: $second-font;
       background: transparent;
       border: 1px solid white;

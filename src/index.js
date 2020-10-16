@@ -28,6 +28,8 @@ function clickWhat(event) {
     const todaysReservations = getReservationsByDate(currentDate, currentGuest.bookings)
     console.log(todaysReservations)
     domUpdate.showTodaysReservations(todaysReservations, hotel)
+  } else if (event.target.innerText === 'Logout') {
+    window.location.reload();
   } else {
     domUpdate.toggleMenu(false);
   }
