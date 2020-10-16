@@ -1,6 +1,24 @@
 class DomUpdates {
   constructor() {}
 
+  toggleMenu(open = true) {
+    const dropDown = `
+    <ul class="dropdown">
+    <li class="selected">Build Hotel</li>
+    <li>My Profile</li>
+    <li>Logout</li>
+    </ul>`;
+    if (!open) {
+      document.querySelector('.manager-header').innerHTML = document.querySelector('.manager-header').innerHTML.replace(dropDown, '');
+      return ;
+    }
+    const isAlreadyOpened = !!document.querySelector('.dropdown');
+    if (isAlreadyOpened) {
+      return ;
+    }
+    document.querySelector('.manager-header').innerHTML += dropDown;
+  }
+
   showLoginError(usernameInput, passwordInput, loginResult) {
     let invalidInfo = document.querySelector('.login-error-message')
     usernameInput.value = ''
