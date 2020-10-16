@@ -44,4 +44,29 @@ header {
     font-size: 2em;
     cursor: pointer;
   }
+
+  ul {
+    position: absolute;
+    top: 70px;
+    right: 40px;
+    list-style: none;
+
+    li {
+      cursor: pointer;
+      font-family: $second-font;
+      background: transparent;
+      border: 1px solid white;
+      padding: 10px 15px;
+      font-size: 1rem;
+
+      &:hover {
+        transition: all .6s;
+        background: rgba(0,0,0,.5);
+      }
+    }
+
+    option.selected {
+      background: #e8e8e8;
+    }
+  }
 }

@@ -22,11 +22,16 @@ function clickWhat(event) {
     // domUpdate.showLoadingScreen('landing', '')
     loginAction()
   } else if (event.target.innerText === '🧑🏼‍🚀') {
-    buildHotel()
+    domUpdate.toggleMenu();
+    buildHotel();
   } else if (event.target.classList.contains('todays-reservations')) {
     const todaysReservations = getReservationsByDate(currentDate, currentGuest.bookings)
     console.log(todaysReservations)
     domUpdate.showTodaysReservations(todaysReservations, hotel)
+  } else if (event.target.innerText === 'Logout') {
+    window.location.reload();
+  } else {
+    domUpdate.toggleMenu(false);
   }
 }
 
